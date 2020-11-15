@@ -1,4 +1,4 @@
-import md5 from "crypto-js/md5";
+import md5 from 'crypto-js/md5';
 
 // gravatarImgUrlGet(emailGravatar) retorna url da imagem
 export const gravatarImgUrlGetter = (email) => {

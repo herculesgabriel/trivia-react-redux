@@ -1,7 +1,10 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
+  const history = useHistory();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [invalidInputs, setInvalidInputs] = useState(true);
@@ -39,10 +42,21 @@ const Login = () => {
           />
         </label>
 
-        <button type="button" disabled={invalidInputs} data-testid="btn-play">
+        <button
+          type="button"
+          disabled={invalidInputs}
+          data-testid="btn-play"
+        >
           Jogar
         </button>
       </form>
+
+      <button
+        data-testid="btn-settings"
+        onClick={() => history.push('/settings')}
+      >
+        Settings
+      </button>
     </div>
   );
 };

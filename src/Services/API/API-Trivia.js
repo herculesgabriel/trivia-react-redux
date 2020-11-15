@@ -9,7 +9,6 @@ export const tokenGetter = async () => {
     console.log("Seu token é ", json.token);
     return json.token;
   } catch (error) {
-    console.log("deu merda aqui e o erro foi:");
     console.log(error);
   }
 };
@@ -22,11 +21,8 @@ export const questionsGetter = async (token, numQuestions = 5) => {
       `https://opentdb.com/api.php?amount=${numQuestions}&token=${token}`
     );
     const json = await response.json();
-    console.log("Objetão das Perguntas:");
-    console.log(json);
     return json;
   } catch (error) {
-    console.log("deu merda aqui e o erro foi:");
     console.log(error);
   }
 };

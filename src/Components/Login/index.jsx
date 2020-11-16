@@ -1,13 +1,17 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { clickJogar } from '../../Redux/actions/user'
+import { Redirect } from 'react-router-dom'
 
-const Login = () => {
+const Login = (props) => {
+
   const history = useHistory();
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [invalidInputs, setInvalidInputs] = useState(true);
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     if (name.length > 0 && email.length > 0) setInvalidInputs(false);
@@ -45,10 +49,14 @@ const Login = () => {
         <button
           type="button"
           disabled={invalidInputs}
-          data-testid="btn-play"
-        >
+          data-testid="btn-play">
+          onClick={() => {
+            props.clickJogar(name, email)
+            setRedirect(true)
+          }}
           Jogar
         </button>
+        {redirect && <Redirect to="/jogo" />}
       </form>
 
       <button
@@ -61,4 +69,13 @@ const Login = () => {
   );
 };
 
-export default Login;
+
+const mapStateToProps = (state) => ({
+
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  clickJogar: (name, email) => dispatch(clickJogar(name, email)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

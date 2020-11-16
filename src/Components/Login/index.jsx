@@ -1,10 +1,13 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { clickJogar } from '../../Redux/actions/user'
 import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
+
+  const history = useHistory();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [invalidInputs, setInvalidInputs] = useState(true);
@@ -43,14 +46,25 @@ const Login = (props) => {
           />
         </label>
 
-        <button type="button" onClick={() => {
-          props.clickJogar(name, email)
-          setRedirect(true)
-        }} disabled={invalidInputs} data-testid="btn-play">
+        <button
+          type="button"
+          disabled={invalidInputs}
+          data-testid="btn-play">
+          onClick={() => {
+            props.clickJogar(name, email)
+            setRedirect(true)
+          }}
           Jogar
         </button>
         {redirect && <Redirect to="/jogo" />}
       </form>
+
+      <button
+        data-testid="btn-settings"
+        onClick={() => history.push('/settings')}
+      >
+        Settings
+      </button>
     </div>
   );
 };

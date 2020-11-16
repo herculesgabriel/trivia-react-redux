@@ -53,7 +53,7 @@ const Login = (props) => {
         }} disabled={invalidInputs} data-testid="btn-play">
           Jogar
         </button>
-        {redirect && <Redirect to="/jogo" />}
+        {redirect && <Redirect to="/game" />}
       </form>
 
       <button

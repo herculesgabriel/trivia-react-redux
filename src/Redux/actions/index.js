@@ -2,18 +2,23 @@ import { questionsGetter } from '../../Services/API/API-Trivia';
 
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
+export const SET_FETCHING = 'SET_FETCHING';
 
-// ! questionsGetter = async (token, numQuestions = 5
+const setFetching = (isFetching) => ({
+  type: SET_FETCHING,
+  isFetching
+});
 
-export const saveQuestions = (questions) => ({
+const saveQuestions = (questions) => ({
   type: SAVE_QUESTIONS,
   questions,
 });
 
 export const getQuestions = (token) => {
   return async (dispatch) => {
-    const questions = questionsGetter(token);
-    console.log(questions);
+    dispatch(setFetching(true));
+    const questions = await questionsGetter(token);
     dispatch(saveQuestions(questions));
+    dispatch(setFetching(false));
   };
 };

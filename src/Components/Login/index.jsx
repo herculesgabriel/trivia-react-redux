@@ -6,11 +6,9 @@ import { clickJogar } from '../../Redux/actions/user'
 import { Redirect } from 'react-router-dom'
 
 import { useHistory } from 'react-router-dom';
-import { clickJogar } from '../../Redux/actions/user'
-import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
-    
+
   const history = useHistory();
 
   const [name, setName] = useState('');
@@ -53,11 +51,11 @@ const Login = (props) => {
         <button
           type="button"
           disabled={invalidInputs}
-          data-testid="btn-play">
+          data-testid="btn-play"
           onClick={() => {
             props.clickJogar(name, email)
             setRedirect(true)
-          }}
+          }}>
           Jogar
         </button>
         {redirect && <Redirect to="/game" />}

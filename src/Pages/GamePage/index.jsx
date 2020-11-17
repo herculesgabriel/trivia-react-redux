@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getQuestions } from '../../Redux/actions';
 
 import Question from '../../Components/Question';
+import Header from '../../Components/Header';
 
 const GamePage = (props) => {
   const { token, getQuestions, questions, isFetching } = props;
@@ -19,6 +20,7 @@ const GamePage = (props) => {
   if (!isFetching && questions.length > 0) {
     return (
       <div>
+        <Header />
         <h1>GamePage</h1>
 
         <Question

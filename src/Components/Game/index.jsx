@@ -8,20 +8,38 @@ import { getQuestions } from '../../Redux/actions';
 const Game = (props) => {
   const { token, getQuestions, questions, isFetching } = props;
   const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [answered, setAnswered] = useState(false);
 
   useEffect(() => { getQuestions(token) }, [token, getQuestions]);
 
   const handleNext = () => {
-    if (questions.length - 1 !== currentQuestion)
+    if (questions.length - 1 !== currentQuestion) {
       setCurrentQuestion(currentQuestion + 1);
+      setAnswered(false);
+    }
   };
 
   if (!isFetching && questions.length > 0) {
     return (
-      <Question
-        question={questions[currentQuestion]}
-        handleNext={handleNext}
-      />
+      <>
+        <Question
+          question={questions[currentQuestion]}
+          setAnswered={setAnswered}
+          answered={answered}
+        />
+
+        {
+          answered && (
+            <button
+              type="button"
+              data-testid="btn-next"
+              onClick={handleNext}
+            >
+              Próxima
+            </button>
+          )
+        }
+      </>
     )
   }
 

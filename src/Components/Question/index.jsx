@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-import { Li } from './style';
-
 const Question = (props) => {
   const { category, question, correct_answer, incorrect_answers } = props.question;
   const [score, setScore] = useState(0);
@@ -33,7 +31,7 @@ const Question = (props) => {
       <div>
         {
           createOptions().map((option, index) => (
-            <Li
+            <button
               key={option}
               onClick={handleSelectAnswer}
               data-testid={
@@ -41,7 +39,7 @@ const Question = (props) => {
               }
             >
               {option}
-            </Li>
+            </button>
           ))
         }
       </div>

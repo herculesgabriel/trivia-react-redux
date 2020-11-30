@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Li } from './style';
+import './style.css';
 
 const Question = (props) => {
   const { category, question, correct_answer, incorrect_answers } = props.question;
-  const [score, setScore] = useState(0);
+  const { answered, setAnswered } = props;
 
   const randomize = () => Math.floor(Math.random() * 2) === 0;
 
@@ -13,14 +13,10 @@ const Question = (props) => {
     const sortMethod = randomize();
 
     return sortMethod ? options.sort() : options.reverse();
-  }
+  };
 
   const handleSelectAnswer = ({ target }) => {
-    const { handleNext } = props;
-    const answer = target.textContent;
-
-    if (answer === correct_answer) setScore(score + 1);
-    handleNext();
+    setAnswered(true);
   };
 
   return (
@@ -30,23 +26,23 @@ const Question = (props) => {
         <p data-testid="question-text">{question}</p>
       </div>
 
-      <div>
+      <div className="questions">
         {
           createOptions().map((option, index) => (
-            <Li
+            <button
+              className={answered ? 'answered' : ''}
               key={option}
               onClick={handleSelectAnswer}
+              disabled={answered}
               data-testid={
                 option === correct_answer ? 'correct-answer' : `wrong-answer-${index}`
               }
             >
               {option}
-            </Li>
+            </button>
           ))
         }
       </div>
-      <p>Score</p>
-      <p>{score}</p>
     </section>
   );
 };

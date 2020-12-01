@@ -6,21 +6,21 @@ import './style.css';
 
 const Question = (props) => {
   const { category, question, difficulty, correct_answer, incorrect_answers, } = props.question;
-  const { answered, setAnswered, addScore, timer, score, } = props;
+  const { answered, setAnswered, addScore, timer, score, assertions } = props;
 
   const { name, gravatarEmail, } = props;
   useEffect(() => {
 
     const player = {
       name,
-      'assertions': 'assertions',
+      assertions,
       score,
       gravatarEmail
     }
 
 
     localStorage.setItem('state', JSON.stringify({ player }))
-  }, [score, name, gravatarEmail])
+  }, [score, name, assertions, gravatarEmail])
 
   const createOptions = () => {
     const options = [...incorrect_answers];
@@ -86,7 +86,7 @@ const mapStateToPros = (state) => ({
   orderQuestions: state.session.orderQuestions,
   score: state.session.score,
   name: state.user.userName,
-  // assertions: state.user.assertions,
+  assertions: state.session.rightAnswers,
   gravatarEmail: state.user.email
 });
 

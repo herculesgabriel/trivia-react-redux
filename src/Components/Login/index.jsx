@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { clickJogar } from '../../Redux/actions/user';
+import { clickJogar } from '../../Redux/actions/user'
+import { Link, Redirect } from 'react-router-dom'
+
+import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
   const history = useHistory();
@@ -65,6 +68,7 @@ const Login = (props) => {
       >
         Settings
       </button>
+      <Link to="/ranking" data-testid="btn-ranking">Ver Ranking</Link>
     </div>
   );
 };

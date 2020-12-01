@@ -14,6 +14,7 @@ const Feedback = (props) => {
       {(rightAnswers < 3) ? failAnswering : goodAnswering}
       <p data-testid="feedback-total-question">{rightAnswers}</p>
       <Link data-testid="btn-play-again" to="/">Jogar novamente</Link>
+      <Link to="/ranking" data-testid="btn-ranking">Ver Ranking</Link>
     </div>
   )
 };

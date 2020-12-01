@@ -5,6 +5,7 @@ import LoginPage from './Pages/LoginPage';
 import GamePage from './Pages/GamePage';
 import SettingsPage from './Pages/SettingsPage';
 import FeedbackPage from './Pages/FeedbackPage';
+import RankingPage from './Pages/RankingPage';
 
 const Routes = () => (
   <BrowserRouter>
@@ -13,6 +14,7 @@ const Routes = () => (
       <Route path="/settings" component={SettingsPage} />
       <Route path="/game" component={GamePage} />
       <Route path="/feedback" component={FeedbackPage} />
+      <Route path="/ranking" component={RankingPage} />
     </Switch>
   </BrowserRouter>
 );

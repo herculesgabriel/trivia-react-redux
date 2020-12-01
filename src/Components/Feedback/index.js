@@ -6,10 +6,6 @@ const Feedback = (props) => {
   const { rightAnswers, score } = props;
   const failAnswering  = <h1 data-testid="feedback-text">Podia ser melhor...</h1>;
   const goodAnswering  = <h1 data-testid="feedback-text">Mandou bem!</h1>;
-  // if(rightAnswers < 3) {
-  //   return <h1 data-testid="feedback-text">Podia ser melhor...</h1>
-  // }
-  // return <h1 data-testid="feedback-text">Mandou bem!</h1>
 
   return (
     <div>

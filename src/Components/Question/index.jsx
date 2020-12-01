@@ -11,14 +11,15 @@ const Question = (props) => {
   const { name, gravatarEmail, } = props;
   useEffect(() => {
 
-    localStorage.setItem('state', JSON.stringify({
-      player: {
-        name,
-        'assertions': 'assertions',
-        score,
-        gravatarEmail
-      }
-    }))
+    const player = {
+      name,
+      'assertions': 'assertions',
+      score,
+      gravatarEmail
+    }
+
+
+    localStorage.setItem('state', JSON.stringify({ player }))
   }, [score, name, gravatarEmail])
 
   const createOptions = () => {

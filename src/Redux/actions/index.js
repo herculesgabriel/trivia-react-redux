@@ -9,7 +9,7 @@ export const RESET_SCORE = 'RESET_SCORE';
 
 const setFetching = (isFetching) => ({
   type: SET_FETCHING,
-  isFetching
+  isFetching,
 });
 
 const saveQuestions = (questions) => ({
@@ -33,9 +33,7 @@ export const setOrder = (order) => ({
 
 export const addScore = (score) => ({
   type: ADD_SCORE,
-  score
+  score,
 });
 
-export const resetScore = () => ({
-  type: RESET_SCORE,
-});
+export const resetScore = () => ({ type: RESET_SCORE });

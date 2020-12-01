@@ -1,4 +1,10 @@
-import { SAVE_QUESTIONS, SET_FETCHING, SET_ORDER, ADD_SCORE, RESET_SCORE } from '../actions';
+import {
+  SAVE_QUESTIONS,
+  SET_FETCHING,
+  SET_ORDER,
+  ADD_SCORE,
+  RESET_SCORE
+} from '../actions';
 
 const INITIAL_STATE = {
   score: 0,
@@ -10,7 +16,7 @@ const INITIAL_STATE = {
   isFetching: false,
 };
 
-export const gameReducer = (state = INITIAL_STATE, action) => {
+const gameReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_FETCHING:
       return {
@@ -43,3 +49,5 @@ export const gameReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
+
+export default gameReducer;

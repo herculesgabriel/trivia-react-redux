@@ -36,6 +36,7 @@ export const gameReducer = (state = INITIAL_STATE, action) => {
     case RESET_SCORE:
       return {
         ...state,
+        rightAnswers: 0,
         score: 0,
       };
     default:

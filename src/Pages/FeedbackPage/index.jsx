@@ -5,8 +5,8 @@ import Feedback from '../../Components/Feedback';
 const FeedbackPage = () => {
     return (
         <div>
-            <Header />
             <Feedback />
+            <Header />
         </div>
     );
 };

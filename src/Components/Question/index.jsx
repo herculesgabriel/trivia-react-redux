@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './style.css';
 
@@ -6,13 +7,10 @@ const Question = (props) => {
   const { category, question, correct_answer, incorrect_answers } = props.question;
   const { answered, setAnswered } = props;
 
-  const randomize = () => Math.floor(Math.random() * 2) === 0;
-
   const createOptions = () => {
-    const options = [correct_answer, ...incorrect_answers];
-    const sortMethod = randomize();
-
-    return sortMethod ? options.sort() : options.reverse();
+    const options = [...incorrect_answers];
+    options.splice(props.orderQuestions[props.currentQuestion], 0, correct_answer)
+    return options
   };
 
   const handleSelectAnswer = ({ target }) => {
@@ -47,4 +45,8 @@ const Question = (props) => {
   );
 };
 
-export default Question;
+const mapStateToPros = (state) => ({
+  orderQuestions: state.session.orderQuestions,
+});
+
+export default connect(mapStateToPros)(Question);

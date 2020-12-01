@@ -1,9 +1,10 @@
-import { SAVE_QUESTIONS, SET_FETCHING } from '../actions';
+import { SAVE_QUESTIONS, SET_FETCHING, SET_ORDER } from '../actions';
 
 const INITIAL_STATE = {
   score: 0,
   config: {},
   questions: [],
+  orderQuestions: [],
   answers: [],
   isFetching: false,
 };
@@ -19,6 +20,11 @@ export const gameReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         questions: action.questions.results,
+      };
+    case SET_ORDER:
+      return {
+        ...state,
+        orderQuestions: action.order,
       };
     default:
       return state;

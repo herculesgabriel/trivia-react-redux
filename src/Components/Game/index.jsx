@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Question from '../Question';
@@ -10,6 +10,7 @@ import { getQuestions, setOrder, resetScore } from '../../Redux/actions';
 const Game = (props) => {
   const { name, gravatarEmail, } = props;
   const { token, getQuestions, questions, isFetching, setOrder, resetScore } = props;
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [timer, setTimer] = useState(30);

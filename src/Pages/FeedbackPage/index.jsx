@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../../Components/Header';
-
+import Feedback from '../../Components/Feedback';
 
 const FeedbackPage = () => {
     return (
         <div>
-            <h1 data-testid="feedback-text">Fidibequi</h1>
+            <Feedback />
             <Header />
         </div>
     );

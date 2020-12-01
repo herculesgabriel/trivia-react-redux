@@ -2,6 +2,7 @@ import { SAVE_QUESTIONS, SET_FETCHING, SET_ORDER, ADD_SCORE, RESET_SCORE } from 
 
 const INITIAL_STATE = {
   score: 0,
+  rightAnswers: 0,
   config: {},
   questions: [],
   orderQuestions: [],
@@ -29,11 +30,13 @@ export const gameReducer = (state = INITIAL_STATE, action) => {
     case ADD_SCORE:
       return {
         ...state,
+        rightAnswers: state.rightAnswers + 1,
         score: state.score + action.score,
       };
     case RESET_SCORE:
       return {
         ...state,
+        rightAnswers: 0,
         score: 0,
       };
     default:

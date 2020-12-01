@@ -1,8 +1,11 @@
 import { questionsGetter } from '../../Services/API/API-Trivia';
 
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
+export const SET_ORDER = 'SET_ORDER';
 export const GET_QUESTIONS = 'GET_QUESTIONS';
 export const SET_FETCHING = 'SET_FETCHING';
+export const ADD_SCORE = 'ADD_SCORE';
+export const RESET_SCORE = 'RESET_SCORE';
 
 const setFetching = (isFetching) => ({
   type: SET_FETCHING,
@@ -22,3 +25,17 @@ export const getQuestions = (token) => {
     dispatch(setFetching(false));
   };
 };
+
+export const setOrder = (order) => ({
+  type: SET_ORDER,
+  order,
+});
+
+export const addScore = (score) => ({
+  type: ADD_SCORE,
+  score
+});
+
+export const resetScore = () => ({
+  type: RESET_SCORE,
+});

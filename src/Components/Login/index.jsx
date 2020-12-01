@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { clickJogar } from '../../Redux/actions/user'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { useHistory } from 'react-router-dom';
 
@@ -68,6 +68,7 @@ const Login = (props) => {
       >
         Settings
       </button>
+      <Link to="/ranking" data-testid="btn-ranking">Ver Ranking</Link>
     </div>
   );
 };

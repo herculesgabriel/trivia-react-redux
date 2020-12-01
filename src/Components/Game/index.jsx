@@ -1,16 +1,36 @@
 import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 
 import Question from '../Question';
 import Timer from '../Timer';
 
-import { getQuestions, setOrder } from '../../Redux/actions';
+import { getQuestions, setOrder, resetScore } from '../../Redux/actions';
 
 const Game = (props) => {
-  const { token, getQuestions, questions, isFetching, setOrder } = props;
+  const { token, getQuestions, questions, isFetching, setOrder, resetScore } = props;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
   const [timer, setTimer] = useState(30);
+  const [feedbackRedirect, setfeedbackRedirect] = useState(false);
+
+  const { name, gravatarEmail, } = props;
+  useEffect(() => {
+
+    localStorage.setItem('state', JSON.stringify({
+      player: {
+        name,
+        'assertions': 0,
+        'score': 0,
+        gravatarEmail
+      }
+    }))
+  }, [name, gravatarEmail])
+
+  useEffect(() => {
+    resetScore()
+    // localStorage.setItem('player', 0);
+  }, [resetScore])
 
   useEffect(() => {
     if (timer > 0) {
@@ -37,19 +57,20 @@ const Game = (props) => {
       setCurrentQuestion(currentQuestion + 1);
       setAnswered(false);
       setTimer(30)
-    }
+    } else setfeedbackRedirect(true)
   };
 
   if (!isFetching && questions.length > 0) {
     return (
       <>
         <Question
+          timer={timer}
           currentQuestion={currentQuestion}
           question={questions[currentQuestion]}
           setAnswered={setAnswered}
           answered={answered}
         />
-
+        {feedbackRedirect && <Redirect to='/feedback' />}
         {
           answered && (
             <button
@@ -61,7 +82,7 @@ const Game = (props) => {
             </button>
           )
         }
-        <Timer timer={timer} setTimer={setTimer} />
+        <Timer timer={timer} />
       </>
     )
   }
@@ -73,11 +94,17 @@ const mapStateToPros = (state) => ({
   token: state.user.token,
   questions: state.session.questions,
   isFetching: state.session.isFetching,
+
+  score: state.session.score,
+  name: state.user.userName,
+  // assertions: state.user.assertions,
+  gravatarEmail: state.user.email
 });
 
 const mapDispatchToPros = (dispatch) => ({
   getQuestions: (token) => dispatch(getQuestions(token)),
   setOrder: (order) => dispatch(setOrder(order)),
+  resetScore: () => dispatch(resetScore())
 });
 
 export default connect(mapStateToPros, mapDispatchToPros)(Game);

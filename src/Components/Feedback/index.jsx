@@ -1,9 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Feedback = (props) => {
-  const { rightAnswers, score } = props;
+const Feedback = () => {
+  const { rightAnswers, score } = useSelector((state) => state.session);
 
   const failAnswering = <h1 data-testid="feedback-text">Podia ser melhor...</h1>;
   const goodAnswering = <h1 data-testid="feedback-text">Mandou bem!</h1>;
@@ -19,9 +19,4 @@ const Feedback = (props) => {
   )
 };
 
-const mapStateToProps = (state) => ({
-  rightAnswers: state.session.rightAnswers,
-  score: state.session.score,
-});
-
-export default connect(mapStateToProps)(Feedback);
+export default Feedback;

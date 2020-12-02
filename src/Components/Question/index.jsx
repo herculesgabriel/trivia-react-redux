@@ -1,19 +1,25 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './style.css';
 
 import { addScore } from '../../Redux/actions/index';
 
-const Question = (props) => {
-  const { answered, setAnswered, addScore, timer, score, assertions } = props;
-  const { name, gravatarEmail, } = props;
+const Question = ({ timer, currentQuestion, questionData, setAnswered, answered }) => {
+  const dispatch = useDispatch();
+  const { userName: name, email: gravatarEmail } = useSelector((state) => state.user);
+  const {
+    orderQuestions,
+    score,
+    rightAnswers: assertions,
+  } = useSelector((state) => state.session);
+
   const {
     category,
     question,
     difficulty,
     correct_answer,
     incorrect_answers
-  } = props.question;
+  } = questionData;
 
   useEffect(() => {
     const player = {
@@ -27,8 +33,6 @@ const Question = (props) => {
   }, [score, name, assertions, gravatarEmail]);
 
   const createOptions = () => {
-    const { orderQuestions, currentQuestion } = props;
-
     const options = [...incorrect_answers];
     options.splice(orderQuestions[currentQuestion], 0, correct_answer);
 
@@ -52,7 +56,7 @@ const Question = (props) => {
       }
 
       const result = 10 + timer * multiplier;
-      addScore(result);
+      dispatch(addScore(result));
     }
 
     setAnswered(true);
@@ -89,16 +93,4 @@ const Question = (props) => {
   );
 };
 
-const mapStateToPros = (state) => ({
-  orderQuestions: state.session.orderQuestions,
-  score: state.session.score,
-  name: state.user.userName,
-  assertions: state.session.rightAnswers,
-  gravatarEmail: state.user.email,
-});
-
-const mapDispatchToPros = (dispatch) => ({
-  addScore: (score) => dispatch(addScore(score)),
-});
-
-export default connect(mapStateToPros, mapDispatchToPros)(Question);
+export default Question;

@@ -1,20 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-const Header = (props) => {
+const Header = () => {
+  const { avatarUrl, userName } = useSelector((state) => state.user);
+  const { score } = useSelector((state) => state.session);
+
   return (
     <header>
-      <img data-testid="header-profile-picture" src={props.avatarUrl} alt="avatar" />
-      <h1 data-testid="header-player-name">Nome: {props.userName}</h1>
-      <h2 data-testid="header-score">{props.score}</h2>
+      <img data-testid="header-profile-picture" src={avatarUrl} alt="avatar" />
+      <h1 data-testid="header-player-name">Nome: {userName}</h1>
+      <h2 data-testid="header-score">{score}</h2>
     </header>
   );
 };
 
-const mapStateToProps = (state) => ({
-  avatarUrl: state.user.avatarUrl,
-  userName: state.user.userName,
-  score: state.session.score,
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

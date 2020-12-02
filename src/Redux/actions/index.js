@@ -22,7 +22,6 @@ export const getQuestions = (token) => {
     dispatch(setFetching(true));
     const questions = await questionsGetter(token);
     dispatch(saveQuestions(questions));
-    dispatch(setFetching(false));
   };
 };
 

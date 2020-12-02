@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   orderQuestions: [],
   answers: [],
   isFetching: false,
+  isEmpty: true,
 };
 
 const gameReducer = (state = INITIAL_STATE, action) => {
@@ -27,6 +28,8 @@ const gameReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         questions: action.questions.results,
+        isFetching: false,
+        isEmpty: false,
       };
     case SET_ORDER:
       return {
@@ -44,6 +47,8 @@ const gameReducer = (state = INITIAL_STATE, action) => {
         ...state,
         rightAnswers: 0,
         score: 0,
+        questions: [],
+        isEmpty: true,
       };
     default:
       return state;

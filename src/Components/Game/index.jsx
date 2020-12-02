@@ -9,7 +9,7 @@ import { getQuestions, setOrder, resetScore } from '../../Redux/actions';
 
 const Game = () => {
   const dispatch = useDispatch();
-  const { questions, isFetching } = useSelector((state) => state.session);
+  const { questions, isFetching, isEmpty } = useSelector((state) => state.session);
   const {
     token,
     userName: name,
@@ -41,7 +41,7 @@ const Game = () => {
     } else setAnswered(true);
   }, [timer]);
 
-  useEffect(() => { dispatch(getQuestions(token)) }, [dispatch, token]);
+  useEffect(() => { dispatch(getQuestions(token)) }, []);
 
   useEffect(() => {
     const defineOrder = () => {
@@ -55,8 +55,10 @@ const Game = () => {
       return questionsRearranged;
     };
 
-    dispatch(setOrder(defineOrder()));
-  }, [dispatch, questions]);
+    if (!isEmpty) {
+      dispatch(setOrder(defineOrder()));
+    }
+  }, [isEmpty]);
 
   const handleNext = () => {
     if (questions.length - 1 !== currentQuestion) {

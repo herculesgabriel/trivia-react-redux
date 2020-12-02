@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import { clickJogar } from '../../Redux/actions/user';
 
-const Login = (props) => {
+const Login = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const [name, setName] = useState('');
@@ -49,8 +50,8 @@ const Login = (props) => {
           disabled={invalidInputs}
           data-testid="btn-play"
           onClick={() => {
-            props.clickJogar(name, email)
-            setRedirect(true)
+            dispatch(clickJogar(name, email));
+            setRedirect(true);
           }}
         >
           Jogar
@@ -70,8 +71,4 @@ const Login = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  clickJogar: (name, email) => dispatch(clickJogar(name, email)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

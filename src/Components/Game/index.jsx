@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import Question from '../Question';
 import Timer from '../Timer';
 
 import { getQuestions, setOrder, resetScore } from '../../Redux/actions';
 
-const Game = (props) => {
-  const { name, gravatarEmail, } = props;
-  const { token, getQuestions, questions, isFetching, setOrder, resetScore } = props;
+const Game = () => {
+  const dispatch = useDispatch();
+  const { questions, isFetching } = useSelector((state) => state.session);
+  const {
+    token,
+    userName: name,
+    email: gravatarEmail,
+  } = useSelector((state) => state.user);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answered, setAnswered] = useState(false);
@@ -19,15 +24,15 @@ const Game = (props) => {
   useEffect(() => {
     const player = {
       name,
-      'assertions': 0,
-      'score': 0,
+      assertions: 0,
+      score: 0,
       gravatarEmail,
     };
 
     localStorage.setItem('state', JSON.stringify({ player }));
   }, [name, gravatarEmail]);
 
-  useEffect(() => { resetScore() }, [resetScore]);
+  useEffect(() => { dispatch(resetScore()) }, [dispatch]);
 
   useEffect(() => {
     if (timer > 0) {
@@ -36,7 +41,7 @@ const Game = (props) => {
     } else setAnswered(true);
   }, [timer]);
 
-  useEffect(() => { getQuestions(token) }, [token, getQuestions]);
+  useEffect(() => { dispatch(getQuestions(token)) }, [dispatch, token]);
 
   useEffect(() => {
     const defineOrder = () => {
@@ -50,8 +55,8 @@ const Game = (props) => {
       return questionsRearranged;
     };
 
-    setOrder(defineOrder());
-  }, [questions, setOrder]);
+    dispatch(setOrder(defineOrder()));
+  }, [dispatch, questions]);
 
   const handleNext = () => {
     if (questions.length - 1 !== currentQuestion) {
@@ -67,7 +72,7 @@ const Game = (props) => {
         <Question
           timer={timer}
           currentQuestion={currentQuestion}
-          question={questions[currentQuestion]}
+          questionData={questions[currentQuestion]}
           setAnswered={setAnswered}
           answered={answered}
         />
@@ -91,19 +96,4 @@ const Game = (props) => {
   return <p>Carregando perguntas...</p>;
 };
 
-const mapStateToPros = (state) => ({
-  token: state.user.token,
-  questions: state.session.questions,
-  isFetching: state.session.isFetching,
-  score: state.session.score,
-  name: state.user.userName,
-  gravatarEmail: state.user.email,
-});
-
-const mapDispatchToPros = (dispatch) => ({
-  getQuestions: (token) => dispatch(getQuestions(token)),
-  setOrder: (order) => dispatch(setOrder(order)),
-  resetScore: () => dispatch(resetScore()),
-});
-
-export default connect(mapStateToPros, mapDispatchToPros)(Game);
+export default Game;

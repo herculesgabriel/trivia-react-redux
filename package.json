@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/user-event": "^7.1.2",
     "crypto-js": "^4.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -15,15 +13,10 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "cy": "cypress run",
-    "cy:open": "cypress open",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:watch": "react-scripts test --watchAll",
-    "eject": "react-scripts eject",
-    "test-coverage": "react-scripts test --coverage --watchAll=false",
-    "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,29 +31,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@testing-library/react": "^9.5.0",
-    "cypress": "^3.7.0",
-    "cypress-multi-reporters": "^1.4.0",
-    "eslint": "6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
-    "mocha": "^7.2.0",
-    "mochawesome": "^6.1.1",
-    "mochawesome-merge": "^4.0.3",
-    "mochawesome-report-generator": "^5.1.0"
-  },
-  "jest": {
-    "coveragePathIgnorePatterns": [
-      "index.js",
-      "serviceWorker.js"
-    ],
-    "coverageReporters": [
-      "json",
-      "lcovonly",
-      "text",
-      "clover"
     ]
   }
 }
